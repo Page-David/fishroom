@@ -125,6 +125,19 @@ $(document).ready(function() {
 		msg.id = fishLogData.current_id;
 		fishLogData.current_id++;
 		fishLogData.msgs.push(msg);
+		// Notification sending...
+		var noti_title = msg.sender + "sent a new message";
+		if (Notification.permission === "granted") {
+			var notification = new Notification(noti_title);
+		}
+
+		else if (Notification.permission !== "denied") {
+			Notification.requestPermission(function (permission) {
+				if (permission === "granted") {
+					var notification = new Notification(noti_title);
+				}
+			});
+		}
 	}
 	
 	var fetchLog = function(limit, lastId, scrollDown) {
