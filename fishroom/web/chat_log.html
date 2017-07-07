@@ -126,8 +126,13 @@ $(document).ready(function() {
 		fishLogData.current_id++;
 		fishLogData.msgs.push(msg);
 		// Notification sending...
-		var noti_title = msg.sender + "sent a new message";
-		if (Notification.permission === "granted") {
+		var noti_title = msg.sender + " sent a new message";
+		var noti_support = True; //prevent send multiple times
+		if (!("Notification" in window) && noti_support) {
+			alert("Your browser does not support Notification.");
+			noti_support = False;
+		}
+		else if (Notification.permission === "granted") {
 			var notification = new Notification(noti_title);
 		}
 
