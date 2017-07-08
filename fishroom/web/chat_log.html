@@ -126,16 +126,16 @@ $(document).ready(function() {
 		fishLogData.current_id++;
 		fishLogData.msgs.push(msg);
 		// Notification sending...
-		var notification = 'New message from ' + msg.sender;
+		var notification_title = 'New message from ' + msg.sender;
 		if ('Notification' in window) {
 			if (Notification.permission === 'granted') {
-				var notification = new Notification(notification);
+				var notification = new Notification(notification_title);
 			}
 
 			else if (Notification.permission !== 'denied') {
 				Notification.requestPermission(function (permission) {
 					if (permission === 'granted') {
-						var notification = new Notification(notification);
+						var notification = new Notification(notification_title);
 					}
 				});
 			}
